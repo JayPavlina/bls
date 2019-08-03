@@ -128,7 +128,7 @@ const MESSAGE_SIZE: usize = 32;
 pub struct Message(pub [u8; MESSAGE_SIZE]);
 
 impl Message {
-    pub fn new(context: &'static [u8], message: &[u8]) -> Message {
+    pub fn new(context: &[u8], message: &[u8]) -> Message {
         use sha3::{Shake128, digest::{Input,ExtendableOutput,XofReader}};
         let mut h = Shake128::default();
         h.input(context);
