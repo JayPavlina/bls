@@ -416,7 +416,7 @@ impl $wrapper<$orientation<::pairing::bls12_381::Bls12>> {
         bytes
     }
 
-    pub fn from_bytes(bytes: [u8; $size]) -> Result<Self,GroupDecodingError> {
+    pub fn from_bytes(bytes: &[u8; $size]) -> Result<Self,GroupDecodingError> {
         $wrapper::<$orientation<::pairing::bls12_381::Bls12>>::decompress_from_slice(&bytes[..])
     }
 }
@@ -718,8 +718,8 @@ mod tests {
 
     fn zbls_usual_bytes_test(x: SignedMessage<ZBLS>) -> SignedMessage<ZBLS> {
         let SignedMessage { message, publickey, signature } = x;
-        let publickey = PublicKey::<ZBLS>::from_bytes(publickey.to_bytes()).unwrap();
-        let signature = Signature::<ZBLS>::from_bytes(signature.to_bytes()).unwrap();
+        let publickey = PublicKey::<ZBLS>::from_bytes(&publickey.to_bytes()).unwrap();
+        let signature = Signature::<ZBLS>::from_bytes(&signature.to_bytes()).unwrap();
         SignedMessage { message, publickey, signature }
     }
 
@@ -727,8 +727,8 @@ mod tests {
 
     fn zbls_tiny_bytes_test(x: SignedMessage<TBLS>) -> SignedMessage<TBLS> {
         let SignedMessage { message, publickey, signature } = x;
-        let publickey = PublicKey::<TBLS>::from_bytes(publickey.to_bytes()).unwrap();        
-        let signature = Signature::<TBLS>::from_bytes(signature.to_bytes()).unwrap();
+        let publickey = PublicKey::<TBLS>::from_bytes(&publickey.to_bytes()).unwrap();
+        let signature = Signature::<TBLS>::from_bytes(&signature.to_bytes()).unwrap();
         SignedMessage { message, publickey, signature }
     }
 
